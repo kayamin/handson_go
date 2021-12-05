@@ -1,5 +1,7 @@
 # Goでのテストサンプル
 
+[Goのテストに入門してみよう！](https://future-architect.github.io/articles/20200601/#API%E3%82%B5%E3%83%BC%E3%83%90%E3%81%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%81%99%E3%82%8B%E3%83%86%E3%82%B9%E3%83%88%E3%82%92%E3%81%97%E3%81%9F%E3%81%84)
+
 ```
 # 必要なパッケージを取得
 ❯ go mod tidy
@@ -66,4 +68,26 @@ FAIL    go_test_sample  6.021s
     --- PASS: TestAdd/normal_1 (3.00s)
 PASS
 ok      go_test_sample  6.019s
+```
+
+## モックを利用したテスト
+
+[gomockでGoのインターフェースのmockを作成してテストを実行する](https://www.asobou.co.jp/blog/web/gomock)
+
+```
+go get github.com/golang/mock/mockgen
+cd mock_test
+mockgen -source=sample.go -destination mock/mock_sample.go
+
+# 生成したファイルを利用するようにテストコードを修正
+
+# テストを実行
+go test -v -run Mock/
+=== RUN   TestWithSelfCreatedMock
+--- PASS: TestWithSelfCreatedMock (0.00s)
+=== RUN   TestWithGeneratedMock
+--- PASS: TestWithGeneratedMock (0.00s)
+PASS
+ok      go_test_sample/mock_test        0.006s
+
 ```
